@@ -1,0 +1,58 @@
+name: Build
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    types:
+      - edited
+      - opened
+      - reopened
+      - synchronize
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          path: zephyr-silabs
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.12
+
+      - name: Setup Zephyr project
+        uses: zephyrproject-rtos/action-zephyr-setup@v1
+        with:
+          app-path: zephyr-silabs
+          toolchains: arm-zephyr-eabi
+
+      - name: Fetch blobs
+        shell: bash
+        run: |
+          west blobs fetch hal_silabs
+
+      - name: Build BT Sample
+        shell: bash
+        run: |
+          west build --pristine --board xg24_dk2601b ../zephyr/samples/bluetooth/beacon/
+          
+      - name: Upload zephyr.hex artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: zephyr-build
+          path: build/zephyr/zephyr.hex
+          if-no-files-found: error
+          retention-days: 180
+
+      - name: Build Bluetooth samples
+        shell: bash
+        run: |
+          west twister -v --inline-logs -K \
+            -s sample.bluetooth.peripheral_hr \
+            -s sample.bluetooth.observer \
+            -p xg27_dk2602a \
+            -p siwx917_rb4338a
