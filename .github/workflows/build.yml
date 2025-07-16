@@ -17,7 +17,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          path: workspace
+          path: app
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -27,13 +27,18 @@ jobs:
       - name: where
         shell: bash
         run: |
-          ls -la /home/runner/work/silabs-efr32-beacon-sample/silabs-efr32-beacon-sample/workspace/app
+          ls -la /home/runner/work/silabs-efr32-beacon-sample/silabs-efr32-beacon-sample
 
       - name: Setup Zephyr project
         uses: zephyrproject-rtos/action-zephyr-setup@v1
         with:
-          app-path: workspace/app
+          app-path: app
           toolchains: arm-zephyr-eabi
+
+      - name: where
+        shell: bash
+        run: |
+          ls -la /home/runner/work/silabs-efr32-beacon-sample/silabs-efr32-beacon-sample
 
       - name: Fetch blobs
         shell: bash
