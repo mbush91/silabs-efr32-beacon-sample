@@ -24,6 +24,11 @@ jobs:
         with:
           python-version: 3.12
 
+      - name: where
+        shell: bash
+        run: |
+          ls -la /home/runner/work/silabs-efr32-beacon-sample/silabs-efr32-beacon-sample
+
       - name: Setup Zephyr project
         uses: zephyrproject-rtos/action-zephyr-setup@v1
         with:
