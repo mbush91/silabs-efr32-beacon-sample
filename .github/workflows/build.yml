@@ -17,7 +17,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          path: app
+          path: workspace
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -32,7 +32,7 @@ jobs:
       - name: Setup Zephyr project
         uses: zephyrproject-rtos/action-zephyr-setup@v1
         with:
-          app-path: app
+          app-path: workspace/app
           toolchains: arm-zephyr-eabi
 
       - name: Fetch blobs
