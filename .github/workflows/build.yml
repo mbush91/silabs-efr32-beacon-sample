@@ -27,7 +27,7 @@ jobs:
       - name: Setup Zephyr project
         uses: zephyrproject-rtos/action-zephyr-setup@v1
         with:
-          app-path: zephyr-silabs
+          app-path: app
           toolchains: arm-zephyr-eabi
 
       - name: Fetch blobs
