@@ -24,10 +24,13 @@ jobs:
         with:
           python-version: 3.12
 
+      - name: where
+        shell: bash
+        run : ls -la
+
       - name: Setup Zephyr project
         uses: zephyrproject-rtos/action-zephyr-setup@v1
         with:
-          app-path: .
           toolchains: arm-zephyr-eabi
 
       - name: Fetch blobs
