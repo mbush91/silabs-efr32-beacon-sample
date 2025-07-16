@@ -27,7 +27,7 @@ jobs:
       - name: where
         shell: bash
         run: |
-          ls -la /home/runner/work/silabs-efr32-beacon-sample/silabs-efr32-beacon-sample/app
+          ls -la /home/runner/work/silabs-efr32-beacon-sample/silabs-efr32-beacon-sample/workspace/app
 
       - name: Setup Zephyr project
         uses: zephyrproject-rtos/action-zephyr-setup@v1
