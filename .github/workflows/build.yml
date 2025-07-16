@@ -48,7 +48,7 @@ jobs:
       - name: Build BT Sample
         shell: bash
         run: |
-          west build --pristine --board xg24_dk2601b ../zephyr/samples/bluetooth/beacon/
+          west build --pristine --board xg24_dk2601b zephyr/samples/bluetooth/beacon/
           
       - name: Upload zephyr.hex artifact
         uses: actions/upload-artifact@v4
